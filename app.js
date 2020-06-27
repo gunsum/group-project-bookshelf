@@ -97,31 +97,33 @@ function render(account) {
   document.querySelector("#accountEmail").innerHTML="";
   let accountEmailNode = document.createTextNode(account.accountEmail);
   document.querySelector("#accountEmail").appendChild(accountEmailNode);
-  readBooksCountList();
+  readBooksCountList(account.readBooks,"#readBooksList");
+  readBooksCountList(account.unreadBooks,"#unreadBooksList")
 }
-function readBooksCountList(){
-account.readBooks.forEach(element => {
-  let tr = document.createElement("tr");
- readBooksList = document.querySelector("#readBooksList");
- readBooksList.appendChild(tr);
- let title = document.createElement("td")
- title.textContent = element.title;
-tr.appendChild(title);
- let author = document.createElement("td");
- author.textContent = element.author;
-tr.appendChild(author);
- let publishDate = document.createElement("td");
- publishDate.textContent = element.publishDate;
-tr.appendChild(publishDate);
-});
-let countRead = account.readBooks.length;
-document.querySelector("#readCount").textContent = countRead;
+function readBooksCountList(bookList,bookListId){
+  bookList.forEach(element => {
+    let tr = document.createElement("tr");
+    readBooksList = document.querySelector(bookListId);
+    readBooksList.appendChild(tr);
+    let title = document.createElement("td")
+    title.textContent = element.title;
+    tr.appendChild(title);
+    let author = document.createElement("td");
+    author.textContent = element.author;
+    tr.appendChild(author);
+    let publishDate = document.createElement("td");
+    publishDate.textContent = element.publishDate;
+    tr.appendChild(publishDate);
+  });
+
+  let countRead = bookList.length;
+  document.querySelector("#readCount").textContent = countRead;
 
   // Add your implementation here
  // * 4. Show the current number of unread books in the Unread Books Count
  
-let unReadBooksNumber = document.querySelector("#unreadCount");
-    unReadBooksNumber.innerText = account.unreadBooks.length;
+ // let unReadBooksNumber = document.querySelector("#unreadCount");
+  //unReadBooksNumber.innerText = account.unreadBooks.length;
 }
 
 /**
